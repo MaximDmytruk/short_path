@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: CustomAppBar(titleName: 'Home screen'),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 16,
