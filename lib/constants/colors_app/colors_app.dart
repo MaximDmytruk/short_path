@@ -11,4 +11,7 @@ class ColorsApp {
   
   static final Color buttonBackgroundColor = Colors.lightBlueAccent;
   static final Color buttonBorderSideColor = Colors.blueAccent;
+
+  static final Color dividerColor = Colors.grey.withAlpha(100);
+
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:short_path/screens/result_list_screen/result_list_screen.dart';
 import 'package:short_path/widgets/custom_app_bars/custom_app_bar.dart';
 import 'package:short_path/widgets/custom_buttons/custom_button.dart';
 
@@ -14,7 +15,8 @@ class ProcessScreen extends StatefulWidget {
 class _ProcessScreenState extends State<ProcessScreen> {
   final int _percentageOfCompletion = 21;
 
-  void sendResultsAction() {}
+  void sendResultsAction() =>
+      Navigator.of(context).pushNamed(ResultListScreen.routeName);
 
   @override
   Widget build(BuildContext context) {
