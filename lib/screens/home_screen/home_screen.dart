@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:short_path/constants/colors_app/colors_app.dart';
-import 'package:short_path/screens/widgets/custom_app_bars/custom_app_bar.dart';
-import 'package:short_path/screens/widgets/custom_buttons/custom_button.dart';
+import 'package:short_path/screens/process_screen/process_screen.dart';
+import 'package:short_path/widgets/custom_app_bars/custom_app_bar.dart';
+import 'package:short_path/widgets/custom_buttons/custom_button.dart';
 
 class HomeScreen extends StatefulWidget {
   static final String routeName = '/home_screen';
@@ -13,12 +14,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  void startProcessAction() {}
+  void startProcessAction() =>
+      Navigator.of(context).pushNamed(ProcessScreen.routeName);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.backgroundColor,
       appBar: CustomAppBar(titleName: 'Home screen'),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),

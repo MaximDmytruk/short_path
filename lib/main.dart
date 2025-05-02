@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:short_path/screens/home_screen.dart';
+import 'package:short_path/constants/colors_app/colors_app.dart';
+import 'package:short_path/screens/home_screen/home_screen.dart';
+import 'package:short_path/screens/process_screen/process_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Short_Path',
-      routes: {HomeScreen.routeName: (context) => HomeScreen()},
+      theme: ThemeData(scaffoldBackgroundColor: ColorsApp.backgroundColor),
+      routes: {
+        HomeScreen.routeName: (context) => HomeScreen(),
+        ProcessScreen.routeName: (context) => ProcessScreen(),
+      },
       initialRoute: HomeScreen.routeName,
     );
   }
