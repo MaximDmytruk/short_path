@@ -14,6 +14,13 @@ class ProcessScreen extends StatefulWidget {
 
 class _ProcessScreenState extends State<ProcessScreen> {
   final int _percentageOfCompletion = 21;
+  
+
+  @override
+  void initState() {
+  
+    super.initState();
+  }
 
   void sendResultsAction() =>
       Navigator.of(context).pushNamed(ResultListScreen.routeName);

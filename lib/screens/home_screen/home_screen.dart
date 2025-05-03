@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:short_path/bloc/home_screen_cubit/api_service_cubit.dart';
+import 'package:short_path/bloc/api_service_cubit/api_service_cubit.dart';
+import 'package:short_path/bloc/cubit/data_service_cubit.dart';
+
 import 'package:short_path/constants/colors_app/colors_app.dart';
 import 'package:short_path/screens/process_screen/process_screen.dart';
 import 'package:short_path/widgets/custom_app_bars/custom_app_bar.dart';
@@ -44,7 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
         child: BlocConsumer<ApiServiceCubit, ApiServiceState>(
           listener: (context, state) {
-            if (state is ApiServiceLoaded) {
+            if (state.status == ApiServiceStatus.loaded) {
+              context.read<DataServiceCubit>().setAnswer(data: state.data);
               Navigator.of(context).pushNamed(ProcessScreen.routeName);
             }
           },
@@ -70,10 +73,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         Expanded(child: TextField(controller: controller)),
                       ],
                     ),
-                    state is ApiServiceError
+                    state.status == ApiServiceStatus.error
                         ? Center(
                           child: Text(
-                            state.error,
+                            state.error ?? 'Error',
                             style: TextStyle(color: ColorsApp.errorTextColor),
                           ),
                         )
@@ -85,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-                state is ApiServiceLoading
+                state.status == ApiServiceStatus.loading
                     ? Center(child: CircularProgressIndicator())
                     : SizedBox.shrink(),
               ],
