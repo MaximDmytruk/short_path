@@ -6,12 +6,12 @@ class ColorsApp {
   static final Color appBarBackgroundColor = Colors.blue;
   static final Color appBarHeaderColor = Colors.white;
   static final Color appBarShadowColor = Colors.black;
-  
+
   static final Color textColor = const Color.fromARGB(255, 70, 70, 70);
-  
+  static final Color errorTextColor = Colors.red;
+
   static final Color buttonBackgroundColor = Colors.lightBlueAccent;
   static final Color buttonBorderSideColor = Colors.blueAccent;
 
   static final Color dividerColor = Colors.grey.withAlpha(100);
-
 }
