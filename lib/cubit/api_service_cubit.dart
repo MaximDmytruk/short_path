@@ -16,7 +16,19 @@ class ApiServiceCubit extends Cubit<ApiServiceState> {
       Future.delayed(Duration(seconds: 2));
       emit(ApiServiceLoaded());
     } catch (e) {
-      emit(ApiServiceError(error: 'Some problem: $e'));
+      emit(ApiServiceError(error: 'Some problem : $e'));
+    }
+  }
+
+  Future<void> sendData() async {
+    emit(ApiServiceLoading());
+
+    try {
+      Future.delayed(Duration(seconds: 2));
+      emit(ApiServiceSent());
+    } catch (e) {
+      emit(ApiServiceError(error: 'Some problem : $e'));
+
     }
   }
 }
