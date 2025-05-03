@@ -6,6 +6,7 @@ class Answer {
   final int height;
   final Point start;
   final Point end;
+  final List<Point>? shortPath;
 
   Answer({
     required this.field,
@@ -13,5 +14,6 @@ class Answer {
     required this.height,
     required this.start,
     required this.end,
+     this.shortPath,
   });
 }

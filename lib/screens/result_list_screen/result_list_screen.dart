@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:short_path/bloc/cubit/data_service_cubit.dart';
 
 import 'package:short_path/constants/colors_app/colors_app.dart';
+import 'package:short_path/models/answer.dart';
 import 'package:short_path/screens/preview_screen/preview_screen.dart';
 import 'package:short_path/widgets/custom_app_bars/custom_app_bar.dart';
 
@@ -23,8 +24,8 @@ class _ResultListScreenState extends State<ResultListScreen> {
     super.initState();
   }
 
-  void itemOnTap(int index) {
-    Navigator.of(context).pushNamed(PreviewScreen.routeName);
+  void itemOnTap({required Answer answer}) {
+    Navigator.of(context).pushNamed(PreviewScreen.routeName, arguments: answer);
   }
 
   @override
@@ -36,12 +37,15 @@ class _ResultListScreenState extends State<ResultListScreen> {
           itemCount = state.answers.length;
           return ListView.separated(
             itemBuilder: (BuildContext context, int index) {
+              final String name =
+                  '(${state.answers[index].start.x},${state.answers[index].start.y})';
+
               return InkWell(
                 onTap: () {
-                  itemOnTap(index);
+                  itemOnTap(answer: state.answers[index]);
                 },
                 child: Text(
-                  ' row # $index',
+                  name,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,
