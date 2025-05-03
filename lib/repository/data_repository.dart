@@ -8,11 +8,7 @@ class DataRepository {
     final Response response = await _dio.get(url);
     if (response.statusCode == 200) {
       final List data = response.data['data'];
-      print('');
-      print('REPOS');
-      print(data);
       return data.map((json) => DataModel.fromJson(json)).toList();
-      
     } else {
       throw Exception('Failed to load data');
     }

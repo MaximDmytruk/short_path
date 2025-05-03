@@ -16,7 +16,7 @@ void main() {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  DataRepository repository = DataRepository();
+  final DataRepository repository = DataRepository();
 
   @override
   Widget build(BuildContext context) {
