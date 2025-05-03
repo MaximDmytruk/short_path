@@ -3,21 +3,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:short_path/models/data.dart';
 import 'package:short_path/repository/data_repository.dart';
 
-part 'home_screen_state.dart';
+part 'api_service_state.dart';
 
-class HomeScreenCubit extends Cubit<HomeScreenState> {
+class ApiServiceCubit extends Cubit<ApiServiceState> {
   final DataRepository repository;
 
-  HomeScreenCubit({required this.repository}) : super(HomeScreenInitial());
+  ApiServiceCubit({required this.repository}) : super(ApiServiceInitial());
 
   Future<void> getData({required String url}) async {
-    emit(HomeScreenLoading());
+    emit(ApiServiceLoading());
 
     try {
       final List<DataModel> data = await repository.fetchData(url: url);
-      emit(HomeScreenLoaded(data));
+      emit(ApiServiceLoaded(data));
     } catch (e) {
-      emit(HomeScreenError(error: 'Failed to load data'));
+      emit(ApiServiceError(error: 'Failed to load data'));
     }
   }
 }

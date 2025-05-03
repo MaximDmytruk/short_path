@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:short_path/bloc/home_screen_cubit/home_screen_cubit.dart';
+import 'package:short_path/bloc/home_screen_cubit/api_service_cubit.dart';
 import 'package:short_path/constants/colors_app/colors_app.dart';
 import 'package:short_path/screens/process_screen/process_screen.dart';
 import 'package:short_path/widgets/custom_app_bars/custom_app_bar.dart';
@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void startProcessAction() {
-    context.read<HomeScreenCubit>().getData(url: controller.text.trim());
+    context.read<ApiServiceCubit>().getData(url: controller.text.trim());
   }
 
   @override
@@ -42,9 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: CustomAppBar(titleName: 'Home screen'),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
-        child: BlocConsumer<HomeScreenCubit, HomeScreenState>(
+        child: BlocConsumer<ApiServiceCubit, ApiServiceState>(
           listener: (context, state) {
-            if (state is HomeScreenLoaded) {
+            if (state is ApiServiceLoaded) {
               Navigator.of(context).pushNamed(ProcessScreen.routeName);
             }
           },
@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Expanded(child: TextField(controller: controller)),
                       ],
                     ),
-                    state is HomeScreenError
+                    state is ApiServiceError
                         ? Center(
                           child: Text(
                             state.error,
@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-                state is HomeScreenLoading
+                state is ApiServiceLoading
                     ? Center(child: CircularProgressIndicator())
                     : SizedBox.shrink(),
               ],

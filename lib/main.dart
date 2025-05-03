@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:short_path/bloc/home_screen_cubit/home_screen_cubit.dart';
+import 'package:short_path/bloc/data/data_cubit.dart';
+import 'package:short_path/bloc/home_screen_cubit/api_service_cubit.dart';
 import 'package:short_path/constants/colors_app/colors_app.dart';
 
 import 'package:short_path/repository/data_repository.dart';
@@ -22,10 +23,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<HomeScreenCubit>(
+        BlocProvider(
           create:
-              (BuildContext context) => HomeScreenCubit(repository: repository),
+              (BuildContext context) => ApiServiceCubit(repository: repository),
         ),
+        BlocProvider(create: (BuildContext context) => DataCubit()),
       ],
       child: MaterialApp(
         title: 'Short_Path',
