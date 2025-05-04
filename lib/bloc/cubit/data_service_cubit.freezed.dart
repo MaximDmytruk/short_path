@@ -19,6 +19,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$DataServiceState {
   dynamic get status => throw _privateConstructorUsedError;
   List<Answer> get answers => throw _privateConstructorUsedError;
+  int get progress => throw _privateConstructorUsedError;
 
   /// Create a copy of DataServiceState
   /// with the given fields replaced by the non-null parameter values.
@@ -34,7 +35,7 @@ abstract class $DataServiceStateCopyWith<$Res> {
     $Res Function(DataServiceState) then,
   ) = _$DataServiceStateCopyWithImpl<$Res, DataServiceState>;
   @useResult
-  $Res call({dynamic status, List<Answer> answers});
+  $Res call({dynamic status, List<Answer> answers, int progress});
 }
 
 /// @nodoc
@@ -51,7 +52,11 @@ class _$DataServiceStateCopyWithImpl<$Res, $Val extends DataServiceState>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? status = freezed, Object? answers = null}) {
+  $Res call({
+    Object? status = freezed,
+    Object? answers = null,
+    Object? progress = null,
+  }) {
     return _then(
       _value.copyWith(
             status:
@@ -64,6 +69,11 @@ class _$DataServiceStateCopyWithImpl<$Res, $Val extends DataServiceState>
                     ? _value.answers
                     : answers // ignore: cast_nullable_to_non_nullable
                         as List<Answer>,
+            progress:
+                null == progress
+                    ? _value.progress
+                    : progress // ignore: cast_nullable_to_non_nullable
+                        as int,
           )
           as $Val,
     );
@@ -79,7 +89,7 @@ abstract class _$$DataServiceStateImplCopyWith<$Res>
   ) = __$$DataServiceStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({dynamic status, List<Answer> answers});
+  $Res call({dynamic status, List<Answer> answers, int progress});
 }
 
 /// @nodoc
@@ -95,7 +105,11 @@ class __$$DataServiceStateImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? status = freezed, Object? answers = null}) {
+  $Res call({
+    Object? status = freezed,
+    Object? answers = null,
+    Object? progress = null,
+  }) {
     return _then(
       _$DataServiceStateImpl(
         status: freezed == status ? _value.status! : status,
@@ -104,6 +118,11 @@ class __$$DataServiceStateImplCopyWithImpl<$Res>
                 ? _value._answers
                 : answers // ignore: cast_nullable_to_non_nullable
                     as List<Answer>,
+        progress:
+            null == progress
+                ? _value.progress
+                : progress // ignore: cast_nullable_to_non_nullable
+                    as int,
       ),
     );
   }
@@ -115,6 +134,7 @@ class _$DataServiceStateImpl implements _DataServiceState {
   const _$DataServiceStateImpl({
     this.status = DataServiceStatus.initial,
     final List<Answer> answers = const [],
+    this.progress = 0,
   }) : _answers = answers;
 
   @override
@@ -130,8 +150,12 @@ class _$DataServiceStateImpl implements _DataServiceState {
   }
 
   @override
+  @JsonKey()
+  final int progress;
+
+  @override
   String toString() {
-    return 'DataServiceState(status: $status, answers: $answers)';
+    return 'DataServiceState(status: $status, answers: $answers, progress: $progress)';
   }
 
   @override
@@ -140,7 +164,9 @@ class _$DataServiceStateImpl implements _DataServiceState {
         (other.runtimeType == runtimeType &&
             other is _$DataServiceStateImpl &&
             const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other._answers, _answers));
+            const DeepCollectionEquality().equals(other._answers, _answers) &&
+            (identical(other.progress, progress) ||
+                other.progress == progress));
   }
 
   @override
@@ -148,6 +174,7 @@ class _$DataServiceStateImpl implements _DataServiceState {
     runtimeType,
     const DeepCollectionEquality().hash(status),
     const DeepCollectionEquality().hash(_answers),
+    progress,
   );
 
   /// Create a copy of DataServiceState
@@ -166,12 +193,15 @@ abstract class _DataServiceState implements DataServiceState {
   const factory _DataServiceState({
     final dynamic status,
     final List<Answer> answers,
+    final int progress,
   }) = _$DataServiceStateImpl;
 
   @override
   dynamic get status;
   @override
   List<Answer> get answers;
+  @override
+  int get progress;
 
   /// Create a copy of DataServiceState
   /// with the given fields replaced by the non-null parameter values.

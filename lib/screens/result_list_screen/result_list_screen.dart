@@ -37,8 +37,7 @@ class _ResultListScreenState extends State<ResultListScreen> {
           itemCount = state.answers.length;
           return ListView.separated(
             itemBuilder: (BuildContext context, int index) {
-              final String name =
-                  '(${state.answers[index].start.x},${state.answers[index].start.y})';
+              final String name = state.answers[index].toString();
 
               return InkWell(
                 onTap: () {

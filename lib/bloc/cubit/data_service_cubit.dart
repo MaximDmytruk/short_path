@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:short_path/bloc/api_service_cubit/api_service_cubit.dart';
 import 'package:short_path/models/answer.dart';
 import 'package:short_path/models/data.dart';
 
@@ -13,51 +12,68 @@ class DataServiceCubit extends Cubit<DataServiceState> {
   DataServiceCubit()
     : super(DataServiceState(status: DataServiceStatus.initial));
 
-  void setAnswer({required List<DataModel> data}) {
-    emit(state.copyWith(status: DataServiceStatus.loading));
+  void setAnswer({required List<DataModel> data}) async {
+    emit(
+      state.copyWith(
+        status: DataServiceStatus.calculateInProgress,
+        progress: 0,
+      ),
+    );
+
     List<Answer> answers = [];
 
-    answers =
-        data.map((element) {
-          final int widthMap = element.field.first.length;
-          final int heightMap = element.field.length;
+    int totalSteps = data.length;
+    int currentStep = 0;
 
-          //Find Blocked Points
-          List<Point> blocs = [];
-          for (int y = 0; y < element.field.length; y++) {
-            String row = element.field[y];
-            for (int x = 0; x < row.length; x++) {
-              if (row[x] == 'X') {
-                blocs.add(Point(x: x, y: y));
+    for (DataModel element in data) {
+      currentStep++;
+      await Future.delayed(Duration(seconds: 1));
+      answers =
+          data.map((element) {
+            final int widthMap = element.field.first.length;
+            final int heightMap = element.field.length;
+
+            //Find Blocked Points
+            List<Point> blocs = [];
+            for (int y = 0; y < element.field.length; y++) {
+              String row = element.field[y];
+              for (int x = 0; x < row.length; x++) {
+                if (row[x] == 'X') {
+                  blocs.add(Point(x: x, y: y));
+                }
               }
             }
-          }
 
-          final List<Point> shortPath = findShortestPath(
-            width: widthMap,
-            height: heightMap,
-            start: element.start,
-            end: element.end,
-            blocked: blocs,
-          );
-          print('');
-          print('Shortpath');
-          print(shortPath);
+            final List<Point> shortPath = _findShortPath(
+              width: widthMap,
+              height: heightMap,
+              start: element.start,
+              end: element.end,
+              blocked: blocs,
+            );
 
-          return Answer(
-            width: widthMap,
-            height: heightMap,
-            start: element.start,
-            end: element.end,
-            blocsCell: blocs,
-            shortPath: shortPath,
-          );
-        }).toList();
+            return Answer(
+              width: widthMap,
+              height: heightMap,
+              start: element.start,
+              end: element.end,
+              blocsCell: blocs,
+              shortPath: shortPath,
+            );
+          }).toList();
 
-    emit(state.copyWith(status: ApiServiceStatus.loaded, answers: answers));
+      int progress = ((currentStep / totalSteps) * 100).toInt();
+      emit(
+        state.copyWith(
+          status: DataServiceStatus.calculateInProgress,
+          progress: progress,
+        ),
+      );
+    }
+    emit(state.copyWith(status: DataServiceStatus.loaded, answers: answers));
   }
 
-  List<Point> findShortestPath({
+  List<Point> _findShortPath({
     required int width,
     required int height,
     required Point start,
@@ -76,7 +92,7 @@ class DataServiceCubit extends Cubit<DataServiceState> {
     ];
 
     final Set<String> visitedPoint = {};
-    //
+
     final List<List<Point>> queue = [
       [start],
     ];

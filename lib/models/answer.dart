@@ -16,4 +16,8 @@ class Answer {
     List<Point>? blocsCell,
   }) : shortPath = shortPath ?? [],
        blocsCell = blocsCell ?? [];
+
+  @override
+  String toString() =>
+      shortPath.map((point) => '(${point.x}, ${point.y})').join('->');
 }

@@ -76,7 +76,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
             },
           ),
           Text(
-            '(0,0) => (0,1) => (0,2)',
+            answer.toString(),
             style: TextStyle(color: ColorsApp.textColor, fontSize: 20),
           ),
         ],
