@@ -25,7 +25,7 @@ class DataServiceCubit extends Cubit<DataServiceState> {
     int totalSteps = data.length;
     int currentStep = 0;
 
-    for (DataModel element in data) {
+    for (DataModel _ in data) {
       currentStep++;
       await Future.delayed(Duration(seconds: 1));
       answers =
