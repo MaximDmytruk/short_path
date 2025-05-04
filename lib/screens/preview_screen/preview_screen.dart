@@ -44,13 +44,24 @@ class _PreviewScreenState extends State<PreviewScreen> {
               int x = index % answer.width;
               int y = index ~/ answer.width;
 
-              final point = Point(x: x, y: y);
+              final Point point = Point(x: x, y: y);
               Color cellColor = Colors.white;
 
               if (answer.start.x == point.x && answer.start.y == point.y) {
                 cellColor = startColor;
               } else if (answer.end.x == point.x && answer.end.y == point.y) {
                 cellColor = endColor;
+              } else if (answer.blocsCell.any(
+                (pointBloc) => pointBloc.x == point.x && pointBloc.y == point.y,
+              )) {
+                cellColor = blocColor;
+              } else if (answer.shortPath.any(
+                (pointShortPath) =>
+                    pointShortPath.x == point.x && pointShortPath.y == point.y,
+              )) {
+                cellColor = pathColor;
+              } else {
+                cellColor = Colors.white;
               }
 
               return Container(
