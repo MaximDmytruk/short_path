@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:short_path/models/answer.dart';
 import 'package:short_path/models/data.dart';
 import 'package:short_path/repository/data_repository.dart';
 
@@ -23,6 +24,23 @@ class ApiServiceCubit extends Cubit<ApiServiceState> {
         state.copyWith(
           status: ApiServiceStatus.error,
           error: 'Failed to load data',
+        ),
+      );
+    }
+  }
+
+  Future<void> sendData(List<Answer> answers) async {
+    emit(state.copyWith(status: ApiServiceStatus.loading));
+
+    try {
+      await repository.sendAnswers(answers);
+      await Future.delayed(Duration(seconds: 2));
+      emit(state.copyWith(status: ApiServiceStatus.sent));
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: ApiServiceStatus.error,
+          error: 'Failed to send data.',
         ),
       );
     }

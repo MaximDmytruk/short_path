@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:short_path/models/answer.dart';
 import 'package:short_path/models/data.dart';
 
 class DataRepository {
@@ -12,5 +13,14 @@ class DataRepository {
     } else {
       throw Exception('Failed to load data');
     }
+  }
+
+  Future<void> sendAnswers(List<Answer> answers) async {
+    final String url = 'https://flutter.webspark.dev/';
+
+    final List<Map<String, dynamic>> data =
+        answers.map((answer) => answer.toJson()).toList();
+
+    await _dio.post(url, data: data);
   }
 }

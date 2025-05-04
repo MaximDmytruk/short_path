@@ -1,6 +1,6 @@
 part of 'api_service_cubit.dart';
 
-enum ApiServiceStatus { initial, loaded, loading, error }
+enum ApiServiceStatus { initial, loaded, loading, error,sent }
 
 @freezed
 class ApiServiceState with _$ApiServiceState {

@@ -53,6 +53,7 @@ class DataServiceCubit extends Cubit<DataServiceState> {
             );
 
             return Answer(
+              id: element.id,
               width: widthMap,
               height: heightMap,
               start: element.start,

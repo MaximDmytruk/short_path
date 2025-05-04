@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:short_path/constants/colors_app/colors_app.dart';
 import 'package:short_path/models/answer.dart';

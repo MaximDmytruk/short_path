@@ -1,6 +1,7 @@
 import 'package:short_path/models/point.dart';
 
 class Answer {
+  final String id;
   final int width;
   final int height;
   final Point start;
@@ -8,6 +9,7 @@ class Answer {
   final List<Point> blocsCell;
   final List<Point> shortPath;
   Answer({
+    required this.id,
     required this.width,
     required this.height,
     required this.start,
@@ -16,6 +18,18 @@ class Answer {
     List<Point>? blocsCell,
   }) : shortPath = shortPath ?? [],
        blocsCell = blocsCell ?? [];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'width': width,
+      'height': height,
+      'start': start.toJson(),
+      'end': end.toJson(),
+      'blocsCell': blocsCell.map((point) => point.toJson()).toList(),
+      'shortPath': shortPath.map((point) => point.toJson()).toList(),
+    };
+  }
 
   @override
   String toString() =>

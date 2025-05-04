@@ -10,4 +10,10 @@ class Point {
   factory Point.fromJson(Map<String, dynamic> json) {
     return Point(x: json['x'], y: json['y']);
   }
+
+Map<String, dynamic> toJson() => {
+        'x': x.toString(),
+        'y': y.toString(),
+      };
+
 }
