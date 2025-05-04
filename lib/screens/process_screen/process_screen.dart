@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:short_path/bloc/api_service_cubit/api_service_cubit.dart';
-import 'package:short_path/bloc/cubit/data_service_cubit.dart';
+import 'package:short_path/bloc/data_service_cubit/data_service_cubit.dart';
 import 'package:short_path/models/answer.dart';
 import 'package:short_path/screens/result_list_screen/result_list_screen.dart';
 import 'package:short_path/widgets/custom_app_bars/custom_app_bar.dart';
